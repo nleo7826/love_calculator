@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+    <title>Love Compatability</title>
+  </head>
+  <body>
+    <h1>Your results</h1>
+    <form
+      action="#"
+      th:action="@{/calculate}"
+      th:object="${contact}"
+      method="post"
+    >
+      <p>
+        First name:
+        <input type="text" th:field="*{fname}" />
+        <span
+          data-th-if="${#fields.hasErrors('fname')}"
+          data-th-errors="*{fname}"
+        ></span>
+      </p>
+      <br />
+      <p>
+        Second name:
+        <input type="text" th:field="*{sname}" />
+        <span
+          data-th-if="${#fields.hasErrors('sname')}"
+          data-th-errors="*{sname}"
+        ></span>
+      </p>
+    </form>
+  </body>
+</html>

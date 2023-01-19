@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compatability Results</title>
+</head>
+<body th:object="${contact}">
+    <h1>Your results</h1>
+    <p>
+        First Name:
+        <p th:text="*{fname}"></p>
+    </p>
+    <br>
+    <p>
+        Second Name:
+        <p th:text="*{sname}"></p>
+    </p>
+    <br>
+    <p>
+        Percentage:
+        <p th:text="*{percentage}"></p>
+    </p>
+    <br>
+    <p>
+        Result:
+        <p th:text="*{result}"></p>
+    </p>
+    <br>
+</body>
+</html>
