@@ -16,23 +16,15 @@
     >
       <p>
         First name:
-        <input type="text" th:field="*{fname}" />
-        <span
-          data-th-if="${#fields.hasErrors('fname')}"
-          data-th-errors="*{fname}"
-        ></span>
+        <input type="text" th-field="*{fname}" />
       </p>
       <br />
       <p>
         Second name:
-        <input type="text" th:field="*{sname}" />
-        <span
-          data-th-if="${#fields.hasErrors('sname')}"
-          data-th-errors="*{sname}"
-        ></span>
+        <input type="text" th-field="*{sname}" />
       </p>
       <p>
-        <button type="submit" value="Calculate">Calculate</button>
+        <button type="submit" value="cal">Calculate</button>
       </p>
     </form>
   </body>

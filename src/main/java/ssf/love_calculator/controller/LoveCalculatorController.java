@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,15 +23,16 @@ public class LoveCalculatorController {
 
     @GetMapping
     public String showForm(Model model) {
-        model.addAttribute("compatability", new Compatability());
+        model.addAttribute("com", new Compatability());
         return "compatability";
     }
 
-    @GetMapping(path = "/result")
-    public String getCompatability(@RequestParam(required = false) String fname,
-        @RequestParam(required = false) String sname, Model model) throws IOException, InterruptedException {
-            Optional<Compatability> c = lsvc.getCompatability(sname, fname);
-            model.addAttribute("compatability", c.get());
-            return "results";
-    }
+    // @GetMapping(path = "/result")
+    // public String getCompatability(@RequestParam(required = false) String fname,
+    //     @RequestParam(required = false) String sname, Model model) throws IOException, InterruptedException {
+    //         Optional<Compatability> c = lsvc.getCompatability(sname, fname);
+    //         model.addAttribute("com", c.get());
+    //         return "results";
+    // }
+
 }
