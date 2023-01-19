@@ -54,8 +54,8 @@ public class Compatability implements Serializable {
         try(InputStream is = new ByteArrayInputStream(json.getBytes())) {
             JsonReader r = Json.createReader(is);
             JsonObject o = r.readObject();
-            c.setFname("fname");
-            c.setSname("sname");
+            c.setFname(o.getString("fname"));
+            c.setSname(o.getString("sname"));
             c.setPercentage(o.getString("percentage"));
             c.setResult(o.getString("result"));
         }

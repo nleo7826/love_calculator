@@ -7,11 +7,11 @@
     <title>Love Compatability</title>
   </head>
   <body>
-    <h1>Your results</h1>
+    <h1>Calculate Love Compatability</h1>
     <form
       action="#"
-      th:action="@{/calculate}"
-      th:object="${contact}"
+      th:action="@{/results}"
+      th:object="${comp}"
       method="post"
     >
       <p>
@@ -30,6 +30,9 @@
           data-th-if="${#fields.hasErrors('sname')}"
           data-th-errors="*{sname}"
         ></span>
+      </p>
+      <p>
+        <button type="submit" value="Calculate">Calculate</button>
       </p>
     </form>
   </body>

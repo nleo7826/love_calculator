@@ -21,16 +21,16 @@ public class LoveCalculatorController {
     private LoveService lsvc;
 
     @GetMapping
-    public String getCompatability(@RequestParam(required = true) String fname,
-        @RequestParam(required = true) String sname, Model model) throws IOException, InterruptedException {
-            Optional<Compatability> c = lsvc.getCompatability(sname, fname);
-            model.addAttribute("compatability", c.get());
-            return "compatability";
-    }
-
-    @GetMapping(path = "/list")
     public String showForm(Model model) {
         model.addAttribute("compatability", new Compatability());
-        return "results";
+        return "compatability";
+    }
+
+    @GetMapping(path = "/result")
+    public String getCompatability(@RequestParam(required = false) String fname,
+        @RequestParam(required = false) String sname, Model model) throws IOException, InterruptedException {
+            Optional<Compatability> c = lsvc.getCompatability(sname, fname);
+            model.addAttribute("compatability", c.get());
+            return "results";
     }
 }
