@@ -9,19 +9,17 @@
   <body>
     <h1>Calculate Love Compatability</h1>
     <form
-      action="#"
-      th:action="@{/results}"
-      th:object="${comp}"
-      method="post"
+      action="calculate/results"
+      method="get"
     >
       <p>
         First name:
-        <input type="text" th-field="*{fname}" />
+        <input type="text" name="fname"/>
       </p>
       <br />
       <p>
         Second name:
-        <input type="text" th-field="*{sname}" />
+        <input type="text" name="sname" />
       </p>
       <p>
         <button type="submit" value="cal">Calculate</button>

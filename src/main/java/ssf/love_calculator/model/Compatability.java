@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.util.Random;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
@@ -15,7 +16,25 @@ public class Compatability implements Serializable {
     private String sname;
     private String percentage;
     private String result;
+    private String id;
 
+    public Compatability() {
+        this.id = generateId(8);
+    }
+
+    public Compatability(String fname, String sname) {
+        this.id = generateId(8);
+        this.fname =fname;
+        this.sname = sname;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getFname() {
         return fname;
@@ -47,6 +66,15 @@ public class Compatability implements Serializable {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    private synchronized String generateId(int numChars) {
+        Random r = new Random();
+        StringBuilder strBuilder = new StringBuilder();
+        while (strBuilder.length() < numChars) {
+            strBuilder.append(Integer.toHexString(r.nextInt()));
+        }
+        return strBuilder.toString().substring(0, numChars);
     }
 
     public static Compatability create(String json) throws IOException {

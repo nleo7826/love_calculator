@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,17 +21,24 @@ public class LoveCalculatorController {
     private LoveService lsvc;
 
     @GetMapping
-    public String showForm(Model model) {
+    public String showForm(Model model) throws IOException {;
         model.addAttribute("com", new Compatability());
         return "compatability";
     }
 
-    // @GetMapping(path = "/result")
-    // public String getCompatability(@RequestParam(required = false) String fname,
-    //     @RequestParam(required = false) String sname, Model model) throws IOException, InterruptedException {
-    //         Optional<Compatability> c = lsvc.getCompatability(sname, fname);
-    //         model.addAttribute("com", c.get());
-    //         return "results";
-    // }
+    @GetMapping(path = "/list")
+    public String showList(Model model) throws IOException {
+        Compatability[] mArr = lsvc.getAllMatchMaking();
+        model.addAttribute("arr", mArr);
+        return "list";
+    }
+
+    @GetMapping(path = "/results")
+    public String getCompatability(@RequestParam(required = true) String fname,
+        @RequestParam(required = true) String sname, Model model) throws IOException, InterruptedException{
+            Optional<Compatability> c = this.lsvc.getCompatability(sname, fname);
+            model.addAttribute("c", c.get());
+            return "results";
+    }
 
 }

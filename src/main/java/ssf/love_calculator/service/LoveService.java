@@ -5,9 +5,14 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -16,6 +21,9 @@ import ssf.love_calculator.model.Compatability;
 @Qualifier("LoveService")
 @Service
 public class LoveService {
+
+    @Autowired
+    RedisTemplate<String, Object> redisTemplate;
 
     private static final String LOVE_CALCULATOR_URL = "https://love-calculator.p.rapidapi.com/getPercentage";
 
@@ -53,8 +61,22 @@ public class LoveService {
         Compatability c = Compatability.create(response.body());
         System.out.println(c);
 
-        if(c != null)
-            return Optional.of(c);                        
+        if(c != null) {
+            redisTemplate.opsForValue().set(c.getId(), response.body().toString());
+            return Optional.of(c);
+        }                        
         return Optional.empty();
+    }
+
+    public Compatability[] getAllMatchMaking() throws IOException {
+        Set<String> allMatchMakingdKeys = redisTemplate.keys("*");
+        List<Compatability> mArr = new LinkedList<Compatability>();
+        for (String matchMakeKey : allMatchMakingdKeys) {
+            String result = (String) redisTemplate.opsForValue().get(matchMakeKey);
+
+            mArr.add((Compatability) Compatability.create(result));
+        }
+
+        return mArr.toArray(new Compatability[mArr.size()]);
     }
 }

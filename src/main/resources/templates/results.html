@@ -6,26 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compatability Results</title>
 </head>
-<body th:object="${comp}">
+<body th:object="${c}">
     <h1>Your results</h1>
     <p>
         First Name:
-        <p th-text="*{fname}"></p>
+        <p data-th-text="*{fname}"></p>
     </p>
     <br>
     <p>
         Second Name:
-        <p th-text="*{sname}"></p>
+        <p data-th-text="*{sname}"></p>
     </p>
     <br>
     <p>
         Percentage:
-        <p th-text="*{percentage}"></p>
+        <p data-th-text="*{percentage}"></p>
     </p>
     <br>
     <p>
         Result:
-        <p th-text="*{result}"></p>
+        <p data-th-text="*{result}"></p>
     </p>
     <br>
 </body>
